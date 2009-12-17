@@ -15,13 +15,13 @@
  */
 function rel_to_abs_filter($op, $delta = 0, $format = -1, $text = '', $cache_id = 0) {
   if ( ($op=='proccess' || $op=='prepare') && $text != '') {
-    
+
     $text = preg_replace(
       '/(src|href)=(\'|")\//',
-      '$1=$2'.url('<front>',array('absolute'=>TRUE)),
+      '$1=$2'. url('<front>', array('absolute' => TRUE)),
       $text
     );
-    
+
     return $text;
   }
   elseif ($op === 'list') {
@@ -41,7 +41,7 @@ function rel_to_abs_filter($op, $delta = 0, $format = -1, $text = '', $cache_id 
  */
 function rel_to_abs_replace($matches) {
   //'$1=$2'.url('<front>',array('absolute'=>TRUE))
-  return $matches[0].'='.$matches[1].url('<front>',array('absolute'=>TRUE));
+  return $matches[0] .'='. $matches[1] . url('<front>', array('absolute' => TRUE));
 }
 
 
