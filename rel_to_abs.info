@@ -1,4 +1,3 @@
-; $Id$
 name = Relative to Absolute Filter
 description = "Filter for convertion of relative paths to absolute URLs"
 
