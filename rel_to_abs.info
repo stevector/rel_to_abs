@@ -3,4 +3,8 @@ description = "Filter for convertion of relative paths to absolute URLs"
 
 package = "Input filters"
 dependencies[] = filter
-core = 6.x
+
+; Information added by drupal.org packaging script on 2011-09-05
+version = "7.x-1.0"
+core = "7.x"
+project = "rel_to_abs"

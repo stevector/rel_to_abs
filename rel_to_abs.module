@@ -2,45 +2,36 @@
 
 /**
  * @file
- * Relative Paths to absolute URLs
+ * Relative Paths to Absolute URLs
  *
- * Filter for convertion of relative paths to absolute URLs
+ * Filter for converting relative paths to absolute URLs.
  *
  */
-
-/**
- * Implementation of hook_filter().
- * @todo support for non pretty urls
- */
-function rel_to_abs_filter($op, $delta = 0, $format = -1, $text = '', $cache_id = 0) {
-  if ( ($op=='proccess' || $op=='prepare') && $text != '') {
-
-    $text = preg_replace(
-      '/(src|href)=(\'|")\//',
-      '$1=$2'. url('<front>', array('absolute' => TRUE)),
-      $text
+function rel_to_abs_filter_info() {
+    $filters['rel_to_abs'] = array(
+        'title' => t('Relative Paths to Absolute URLs'),
+        'description' => t('Filter for convertion of relative paths to absolute URLs.'),
+        'process callback' => 'rel_to_abs_filter_html',
+        'settings callback' => 'rel_to_abs_filter_html_settings',
+        'tips callback' => 'rel_to_abs_filter_html_tips',
+        'cache' => FALSE,
     );
+    return $filters;
+}
 
+// Filter callbacks.
+
+function rel_to_abs_filter_html($text, $filter, $format) {
+    $lang = language_default();
+    $text = preg_replace('/(src|href)=(\'|")\//', '$1=$2' . url('<front>', array('absolute' => TRUE, 'language' => $lang)), $text);
     return $text;
-  }
-  elseif ($op === 'list') {
-    return array(t('Relative Paths to Absolute URLs'));
-  }
-  elseif ($op === 'description') {
-    return t('Filter for convertion of relative paths to absolute URLs');
-  }
-  elseif ($op === 'settings') {
-    return array();
-  }
-  return $text;
 }
 
-/**
- * Replace
- */
-function rel_to_abs_replace($matches) {
-  //'$1=$2'.url('<front>',array('absolute'=>TRUE))
-  return $matches[0] .'='. $matches[1] . url('<front>', array('absolute' => TRUE));
+function rel_to_abs_filter_html_settings($format) {
+    
 }
 
+function rel_to_abs_filter_html_tips($filter, $format, $long = FALSE) {
+    
+}
 
