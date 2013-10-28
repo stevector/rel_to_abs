@@ -8,31 +8,33 @@
  *
  */
 function rel_to_abs_filter_info() {
-    $filters['rel_to_abs'] = array(
-        'title' => t('Relative Paths to Absolute URLs'),
-        'description' => t('Filter for convertion of relative paths to absolute URLs.'),
-        'process callback' => 'rel_to_abs_filter_html',
-        'settings callback' => 'rel_to_abs_filter_html_settings',
-        'tips callback' => 'rel_to_abs_filter_html_tips',
-        'cache' => TRUE,
-    );
-    return $filters;
+  $filters['rel_to_abs'] = array(
+    'title' => t('Relative Paths to Absolute URLs'),
+    'description' => t('Filter for convertion of relative paths to absolute URLs.'),
+    'process callback' => 'rel_to_abs_filter_html',
+    'settings callback' => 'rel_to_abs_filter_html_settings',
+    'tips callback' => 'rel_to_abs_filter_html_tips',
+    'cache' => TRUE,
+  );
+  return $filters;
 }
 
 // Filter callbacks.
 
 function rel_to_abs_filter_html($text, $filter, $format) {
-    $lang = language_default();
-    $text = preg_replace('/(src|href)=(\'|")' . preg_quote(base_path(), '/') . 
-'(?!\/)/', '$1=$2' . url('<front>', array('absolute' => TRUE, 'language' => $lang)), $text);
-    return $text;
+  $lang = language_default();
+  $text = preg_replace('/(src|href)=(\'|")' . preg_quote(base_path(), '/') . '(?!\/)/', '$1=$2' . url('<front>', array(
+      'absolute' => TRUE,
+      'language' => $lang
+    )), $text);
+  return $text;
 }
 
 function rel_to_abs_filter_html_settings($format) {
-    
+
 }
 
 function rel_to_abs_filter_html_tips($filter, $format, $long = FALSE) {
-    
+
 }
 
