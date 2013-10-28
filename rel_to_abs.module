@@ -14,7 +14,7 @@ function rel_to_abs_filter_info() {
         'process callback' => 'rel_to_abs_filter_html',
         'settings callback' => 'rel_to_abs_filter_html_settings',
         'tips callback' => 'rel_to_abs_filter_html_tips',
-        'cache' => FALSE,
+        'cache' => TRUE,
     );
     return $filters;
 }
