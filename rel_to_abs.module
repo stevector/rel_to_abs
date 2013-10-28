@@ -24,7 +24,7 @@ function rel_to_abs_filter_info() {
 function rel_to_abs_filter_html($text, $filter, $format) {
     $lang = language_default();
     $text = preg_replace('/(src|href)=(\'|")' . preg_quote(base_path(), '/') . 
-'/', '$1=$2' . url('<front>', array('absolute' => TRUE, 'language' => $lang)), $text);
+'(?!\/)/', '$1=$2' . url('<front>', array('absolute' => TRUE, 'language' => $lang)), $text);
     return $text;
 }
 
