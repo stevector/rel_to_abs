@@ -1,10 +1,5 @@
 <?php
 
-/**
- * @file
- * Contains \Drupal\rel_to_abs\Plugin\Filter\RelToAbs.
- */
-
 namespace Drupal\rel_to_abs\Plugin\Filter;
 
 use Drupal\filter\FilterProcessResult;
@@ -30,7 +25,7 @@ class RelToAbs extends FilterBase {
       'absolute' => TRUE,
       'language' => \Drupal::getContainer()
         ->get('language_manager')
-        ->getLanguage($langcode)
+        ->getLanguage($langcode),
     ));
 
     $text = $this->absoluteUrl($text, $base_url);
