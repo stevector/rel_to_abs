@@ -2,6 +2,7 @@
 
 namespace Drupal\rel_to_abs\Plugin\Filter;
 
+use Drupal\Core\Url;
 use Drupal\filter\FilterProcessResult;
 use Drupal\filter\Plugin\FilterBase;
 
@@ -21,12 +22,12 @@ class RelToAbs extends FilterBase {
    */
   public function process($text, $langcode) {
 
-    $base_url = \Drupal::url('<front>', array(), array(
+    $base_url = Url::fromRoute('<front>', array(), array(
       'absolute' => TRUE,
       'language' => \Drupal::getContainer()
         ->get('language_manager')
         ->getLanguage($langcode),
-    ));
+    ))->toString();
 
     $text = $this->absoluteUrl($text, $base_url);
     return new FilterProcessResult($text);

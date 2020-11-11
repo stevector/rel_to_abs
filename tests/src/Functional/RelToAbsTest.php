@@ -1,10 +1,11 @@
 <?php
 
-namespace Drupal\rel_to_abs\Tests;
+namespace Drupal\Tests\rel_to_abs\Functional;
 
+use Drupal\Core\Url;
 use Drupal\rel_to_abs\Plugin\Filter\RelToAbs;
 use Drupal\Core\Language\LanguageInterface;
-use Drupal\simpletest\WebTestBase;
+use Drupal\Tests\BrowserTestBase;
 
 /**
  * Ensure that the rel_to_abs filter provided functions properly.
@@ -21,9 +22,17 @@ use Drupal\simpletest\WebTestBase;
  * @group rel_to_abs
  * @group filters
  */
-class RelToAbsTest extends WebTestBase {
+class RelToAbsTest extends BrowserTestBase {
 
-  static public $modules = array('rel_to_abs');
+  /**
+   * {@inheritdoc}
+   */
+  protected static $modules = ['rel_to_abs'];
+
+  /**
+   * {@inheritdoc}
+   */
+  protected $defaultTheme = 'stark';
 
   /**
    * Unit test to check relative to absolute url conversion.
@@ -33,10 +42,10 @@ class RelToAbsTest extends WebTestBase {
       ->get('language_manager')
       ->getLanguage(LanguageInterface::LANGCODE_NOT_SPECIFIED);
 
-    $front = \Drupal::url('<front>', array(), array(
+    $front = Url::fromRoute('<front>', array(), array(
       'absolute' => TRUE,
       'language' => $language,
-    ));
+    ))->toString();
 
     $filter = new RelToAbs(array(), 'rel_to_abs', array('provider' => 'rel_to_abs'));
 
